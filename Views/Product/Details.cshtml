@@ -1,0 +1,39 @@
+﻿@model ECommerceApp.ViewModels.ProductDetailsViewModel
+
+<h2>@Model.Product.Name</h2>
+
+<div>
+    @foreach (var img in Model.Product.Images)
+    {
+        <img src="@img.ImagePath" style="max-width:300px; max-height:300px;" />
+    }
+</div>
+
+<p>@Model.Product.Description</p>
+<p>Category: @Model.Product.Category</p>
+<p>Price: @Model.Product.Price.ToString("C")</p>
+<p>Stock: @Model.Product.StockQuantity</p>
+<p>Average Rating: @Model.AverageRating.ToString("0.0") / 5</p>
+
+<h3>Reviews:</h3>
+@foreach (var review in Model.Product.Reviews)
+{
+    <div>
+        <strong>@review.User?.FullName ?? "Anonymous"</strong>: @review.Rating stars
+        <p>@review.Comment</p>
+    </div>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h4>Add Review:</h4>
+    <form asp-controller="Review" asp-action="Create" method="post">
+        <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+        <label for="Rating">Rating (1-5):</label>
+        <input type="number" name="Rating" min="1" max="5" />
+        <br />
+        <label for="Comment">Comment:</label><br />
+        <textarea name="Comment"></textarea><br />
+        <button type="submit">Submit Review</button>
+    </form>
+}

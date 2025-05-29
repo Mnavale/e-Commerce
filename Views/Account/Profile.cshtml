@@ -1,0 +1,22 @@
+﻿@model ECommerceApp.ViewModels.ProfileViewModel
+
+<h2>My Profile</h2>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color: green">@ViewBag.Message</p>
+}
+
+<form asp-action="Profile" method="post">
+    <div>
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" />
+        <span asp-validation-for="FullName"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <button type="submit">Update Profile</button>
+</form>

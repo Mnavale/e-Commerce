@@ -1,0 +1,44 @@
+﻿@model ECommerceApp.ViewModels.ProductEditViewModel
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+    <div>
+        <label asp-for="Price"></label>
+        <input asp-for="Price" />
+        <span asp-validation-for="Price"></span>
+    </div>
+    <div>
+        <label asp-for="Category"></label>
+        <input asp-for="Category" />
+        <span asp-validation-for="Category"></span>
+    </div>
+    <div>
+        <label asp-for="StockQuantity"></label>
+        <input asp-for="StockQuantity" />
+        <span asp-validation-for="StockQuantity"></span>
+    </div>
+    <div>
+        <h4>Existing Images</h4>
+        @foreach (var img in Model.ExistingImages)
+        {
+            <img src="@img.ImagePath" style="width:100px;height:100px;" />
+        }
+    </div>
+    <div>
+        <label>Add More Images</label>
+        <input type="file" name="NewImages" multiple />
+    </div>
+    <button type="submit">Save</button>
+</form>
